@@ -1,8 +1,33 @@
 import Foundation
+import UIKit
+import SpriteKit
 
 public extension Optional {
     public var isNil: Bool {
         return self == nil
+    }
+}
+
+public enum CGPointDirection {
+    case x, y
+}
+
+public extension CGPoint {
+    public func advanced(by: CGFloat, inDirection: CGPointDirection) -> CGPoint {
+        switch inDirection {
+        case .x:
+            return CGPoint(x: x + by, y: y)
+        case .y:
+            return CGPoint(x: x, y: y + by)
+        }
+    }
+}
+
+public extension SKNode {
+    public var center: CGPoint {
+        return self.position
+            .advanced(by: 0.5 * self.frame.height, inDirection: .x)
+            .advanced(by: 0.5 * self.frame.width,  inDirection: .y)
     }
 }
 
