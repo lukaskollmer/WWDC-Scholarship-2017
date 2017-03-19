@@ -46,7 +46,7 @@
              return currentStep.path
          }
 
-         let neighboringLocations = maze.tile(atLocation: currentStep.position).neighbouringTiles.filter { maze.tile(atLocation: $0).state == .path }
+         let neighboringLocations = maze.tile(atLocation: currentStep.position).neighboringTiles.filter { maze.tile(atLocation: $0).state == .path }
          for location in neighboringLocations {
              var step = PathStep(position: location)
              if closedSteps.contains(step) {

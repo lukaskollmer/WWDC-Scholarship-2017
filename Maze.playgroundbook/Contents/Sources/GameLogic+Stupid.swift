@@ -12,7 +12,7 @@ extension GameLogic {
             var possibleLocations = [TileLocation]()
 
             let loadPossibleLocations = {
-                possibleLocations = currentTile.neighbouringTiles
+                possibleLocations = currentTile.neighboringTiles
                     .filter { mazeScene.tile(atLocation: $0).state == .path }
                     .filter { !path.contains($0) }
             }

@@ -36,7 +36,7 @@ public class Tile : SKSpriteNode {
         }
     }
 
-    public var neighbouringTiles: [TileLocation] {
+    public var neighboringTiles: [TileLocation] {
         guard let maze = self.mazeScene?.maze else { return [] }
 
         return [
