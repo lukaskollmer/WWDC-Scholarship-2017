@@ -9,7 +9,7 @@
 	<key>Description</key>
 	<string>TODO: Description</string>
 	<key>LiveViewMode</key>
-	<string>VisibleByDefault</string>
+	<string>HiddenByDefault</string>
 	<key>LiveViewEdgeToEdge</key>
 	<true/>
 	<key>PlaygroundLoggingMode</key>
