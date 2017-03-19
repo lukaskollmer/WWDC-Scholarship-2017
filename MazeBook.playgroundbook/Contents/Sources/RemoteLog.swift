@@ -8,7 +8,7 @@ let threadId = pthread_mach_thread_np(pthread_self())
 
 public func log(_ items: Any...) {
     return;
-    
+
     do {
         let info: [String : Any] = [
             "name": name,

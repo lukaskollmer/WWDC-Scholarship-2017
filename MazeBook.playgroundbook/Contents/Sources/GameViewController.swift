@@ -118,7 +118,6 @@ public class GameViewController: UIViewController, UITableViewDataSource, UITabl
                 path.move(to: start.center)
                 for location in pathResult.path {
                     if let tile = start.mazeScene?.tile(atLocation: location) {
-                        //tile.showPathIndicator = true
                         path.addLine(to: tile.center)
                     }
                 }
@@ -260,11 +259,11 @@ public class GameViewController: UIViewController, UITableViewDataSource, UITabl
 
         let buttonConstraints = [
             NSLayoutConstraint(item: resetButton, attribute: .trailing, relatedBy: .equal, toItem: view, attribute: .trailing, multiplier: 1.0, constant: -50.0),
-            NSLayoutConstraint(item: resetButton, attribute: .top, relatedBy: .equal, toItem: view, attribute: .top, multiplier: 1.0, constant: 20.0),
+            NSLayoutConstraint(item: resetButton, attribute: .centerY, relatedBy: .equal, toItem: messageLabel, attribute: .centerY, multiplier: 1.0, constant: 0.0),
             NSLayoutConstraint(item: resetButton, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1.0, constant: 80.0),
 
             NSLayoutConstraint(item: run100TimesButton, attribute: .trailing, relatedBy: .equal, toItem: resetButton, attribute: .leading, multiplier: 1.0, constant: -10.0),
-            NSLayoutConstraint(item: run100TimesButton, attribute: .top, relatedBy: .equal, toItem: view, attribute: .top, multiplier: 1.0, constant: 20.0),
+            NSLayoutConstraint(item: run100TimesButton, attribute: .centerY, relatedBy: .equal, toItem: messageLabel, attribute: .centerY, multiplier: 1.0, constant: 0.0),
             NSLayoutConstraint(item: run100TimesButton, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1.0, constant: 80.0),
         ]
 
@@ -275,11 +274,10 @@ public class GameViewController: UIViewController, UITableViewDataSource, UITabl
             NSLayoutConstraint(item: titleLabel, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1.0, constant: 80.0),
         ]
 
-        let run100TimesProgressBarConstraints: [NSLayoutConstraint] = [
+        let run100TimesProgressBarConstraints = [
             NSLayoutConstraint(item: run100TimesProgressBar, attribute: .leading, relatedBy: .equal, toItem: mazeView, attribute: .leading, multiplier: 1.0, constant: 0.0),
             NSLayoutConstraint(item: run100TimesProgressBar, attribute: .trailing, relatedBy: .equal, toItem: mazeView, attribute: .trailing, multiplier: 1.0, constant: 0.0),
             NSLayoutConstraint(item: run100TimesProgressBar, attribute: .centerY, relatedBy: .equal, toItem: mazeView, attribute: .centerY, multiplier: 1.0, constant: 0.0),
-            //NSLayoutConstraint(item: run100TimesProgressBar, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1.0, constant: 4.0),
 
             NSLayoutConstraint(item: run100TimesProgressLabel, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1.0, constant: 30.0),
             NSLayoutConstraint(item: run100TimesProgressLabel, attribute: .leading, relatedBy: .equal, toItem: run100TimesProgressBar, attribute: .leading, multiplier: 1.0, constant: 0.0),
