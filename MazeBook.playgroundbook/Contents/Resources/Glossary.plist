@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Terms</key>
+	<dict>
+		<key>A*</key>
+		<dict>
+			<key>Definition</key>
+			<string>The practivce of encrypting and decrypting messages written in secret code.</string>
+			<key>FirstUse</key>
+			<dict>
+				<key>PageReference</key>
+				<string>Overview</string>
+				<key>Title</key>
+				<string>Overview</string>
+			</dict>
+		</dict>
+
+		<key>Dijkstra's algorithm</key>
+		<dict>
+			<key>Definition</key>
+			<string>![dijkstra](dijkstra_small.png)</string>
+			<key>FirstUse</key>
+			<dict>
+				<key>PageReference</key>
+				<string>Overview</string>
+				<key>Title</key>
+				<string>Overview</string>
+			</dict>
+		</dict>
+
+		<key>Breadth-first search</key>
+		<dict>
+			<key>Definition</key>
+			<string>![bfs](breadth-first.png)</string>
+			<key>FirstUse</key>
+			<dict>
+				<key>PageReference</key>
+				<string>Overview</string>
+				<key>Title</key>
+				<string>Overview</string>
+			</dict>
+		</dict>
+
+
+	</dict>
+</dict>
+</plist>
