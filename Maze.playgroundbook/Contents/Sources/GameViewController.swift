@@ -290,7 +290,7 @@ public class GameViewController: UIViewController, UITableViewDataSource, UITabl
         ]
 
         let messageLabelConstraints = [
-            NSLayoutConstraint(item: messageLabel, attribute: .leading, relatedBy: .equal, toItem: titleLabel, attribute: .trailing, multiplier: 1.0, constant: 10.0),
+            NSLayoutConstraint(item: messageLabel, attribute: .leading, relatedBy: .equal, toItem: titleLabel, attribute: .trailing, multiplier: 1.0, constant: 8.0),
             NSLayoutConstraint(item: messageLabel, attribute: .trailing, relatedBy: .equal, toItem: mazeView, attribute: .trailing, multiplier: 1.0, constant: 0.0),
             NSLayoutConstraint(item: messageLabel, attribute: .top, relatedBy: .equal, toItem: view, attribute: .top, multiplier: 1.0, constant: 20.0),
             NSLayoutConstraint(item: messageLabel, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1.0, constant: 40.0),

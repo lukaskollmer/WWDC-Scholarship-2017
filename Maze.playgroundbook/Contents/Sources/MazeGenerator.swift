@@ -6,6 +6,10 @@
 //  Copyright © 2017 Lukas Kollmer. All rights reserved.
 //
 
+/**
+ Maze generation code adapted from https://developer.apple.com/library/content/samplecode/Pathfinder_GameplayKit/Introduction/Intro.html
+ */
+
 
 import Foundation
 import GameplayKit
