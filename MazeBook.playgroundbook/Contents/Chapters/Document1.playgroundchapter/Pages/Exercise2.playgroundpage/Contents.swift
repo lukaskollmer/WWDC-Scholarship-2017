@@ -29,7 +29,7 @@
 
  You can create new `TileLocation` objects either by using the `init(row: Int, column: Int)` initializer or by using the `advanced(by: Int, inDirection: Direction)` function
 
- Please note that, due to the way Swift Playgrounds works, extensive use of the `print` function will show down your algorithm by a lot.
+ Please note that, due to the way Swift Playgrounds works, extensive use of the `print` function will slow down your algorithm by a lot.
 
 
  */
