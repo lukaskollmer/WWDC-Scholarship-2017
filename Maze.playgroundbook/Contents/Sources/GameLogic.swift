@@ -7,12 +7,11 @@ public struct GameLogic {
     public enum Algorithm {
         case stupid
         case A_star
-        case A_star_custom
         case custom(AlgorithmFunction)
 
         public var isCustom: Bool {
             switch self {
-            case .stupid, .A_star, .A_star_custom:
+            case .stupid, .A_star:
                 return false
             default:
                 return true
@@ -35,8 +34,6 @@ public struct GameLogic {
             path = GameLogic.findPathStupid(from: from, to: to)
         case .A_star:
             path = GameLogic.findAStar(from: from, to: to)
-        case .A_star_custom:
-            path = GameLogic.findAStarCustom(from: from, to: to)
         case .custom(let algorithm):
             path = algorithm(from, to)
         }
