@@ -5,10 +5,19 @@ public struct GameLogic {
     public typealias AlgorithmFunction = (Tile, Tile) -> [TileLocation]
 
     public enum Algorithm {
-    case stupid
+        case stupid
         case A_star
         case A_star_custom
         case custom(AlgorithmFunction)
+
+        public var isCustom: Bool {
+            switch self {
+            case .stupid, .A_star, .A_star_custom:
+                return false
+            default:
+                return true
+            }
+        }
     }
 
     public struct PathAlgoritmResult {
