@@ -1,5 +1,6 @@
 import UIKit
 import SpriteKit
+import PlaygroundSupport
 
 
 let ColorChangeDuration: TimeInterval = 0.1
@@ -7,7 +8,11 @@ let ColorChangeDuration: TimeInterval = 0.1
 
 public class GameViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
-    public var algorithm: GameLogic.Algorithm = .stupid
+    public var algorithm: GameLogic.Algorithm = .stupid // TODO dont use .stupid
+
+    public var successMessage: String?
+    public var hints: [String]?
+    public var solution: String?
 
     let mazeView = MazeView(frame: CGRect(x: 20, y: 20, width: 400, height: 400))
 
@@ -110,6 +115,10 @@ public class GameViewController: UIViewController, UITableViewDataSource, UITabl
                 self.run100TimesButton.isHidden = false
 
                 let pathResult = GameLogic.findPath(from: start, to: end, using: self.algorithm)
+
+                if pathResult.path.isEmpty, let hints = self.hints {
+                    PlaygroundPage.current.assessmentStatus = .fail(hints: hints, solution: self.solution)
+                } // TODO implement else (.success)
 
                 self.durationStats["Duration"] = Utilities.string(fromTimeInterval: pathResult.duration)
 

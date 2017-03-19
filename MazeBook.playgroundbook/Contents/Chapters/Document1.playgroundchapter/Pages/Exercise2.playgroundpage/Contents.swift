@@ -62,6 +62,7 @@ playGame()
 if _playGameCalled {
     let viewController = GameViewController()
     viewController.algorithm = .custom(findPath)
+    viewController.hints = ["Try comparing different neighboring tiles based on their distance to the destination."]
     PlaygroundPage.current.liveView = viewController
 }
 //#-end-hidden-code
