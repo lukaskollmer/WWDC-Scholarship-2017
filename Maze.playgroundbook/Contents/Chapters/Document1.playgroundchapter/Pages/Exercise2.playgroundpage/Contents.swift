@@ -40,7 +40,7 @@
 import PlaygroundSupport
 
 
-func playGame(_ algorithm: GameLogic.Algorithm) {
+func solveMaze(_ algorithm: GameLogic.Algorithm) {
     let viewController = GameViewController()
     viewController.algorithm = algorithm
     viewController.hints = ["Try comparing different neighboring tiles based on their distance to the destination."]
@@ -57,5 +57,5 @@ func findPath(startTile: Tile, endTile: Tile) -> [TileLocation] {
     return []
 }
 
-playGame(.custom(findPath))
+solveMaze(.custom(findPath))
 //#-end-editable-code
