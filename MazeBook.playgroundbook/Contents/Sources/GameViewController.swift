@@ -250,15 +250,12 @@ public class GameViewController: UIViewController, UITableViewDataSource, UITabl
             NSLayoutConstraint(item: mazeView, attribute: .top, relatedBy: .equal, toItem: view, attribute: .top, multiplier: 1.0, constant: 80.0),
             NSLayoutConstraint(item: mazeView, attribute: .height, relatedBy: .equal, toItem: mazeView, attribute: .width, multiplier: 1.0, constant: 0.0),
 
-            NSLayoutConstraint(item: messageLabel, attribute: .leading, relatedBy: .equal, toItem: titleLabel, attribute: .trailing, multiplier: 1.0, constant: 10.0),
-            NSLayoutConstraint(item: messageLabel, attribute: .trailing, relatedBy: .equal, toItem: view, attribute: .trailing, multiplier: 1.0, constant: -50.0),
-            NSLayoutConstraint(item: messageLabel, attribute: .top, relatedBy: .equal, toItem: view, attribute: .top, multiplier: 1.0, constant: 20.0),
-            NSLayoutConstraint(item: messageLabel, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1.0, constant: 40.0),
+            NSLayoutConstraint(item: mazeView, attribute: .width, relatedBy: .lessThanOrEqual, toItem: nil, attribute: .notAnAttribute, multiplier: 1.0, constant: 580.0),
         ]
 
 
         let buttonConstraints = [
-            NSLayoutConstraint(item: resetButton, attribute: .trailing, relatedBy: .equal, toItem: view, attribute: .trailing, multiplier: 1.0, constant: -50.0),
+            NSLayoutConstraint(item: resetButton, attribute: .trailing, relatedBy: .equal, toItem: mazeView, attribute: .trailing, multiplier: 1.0, constant: 0.0),
             NSLayoutConstraint(item: resetButton, attribute: .centerY, relatedBy: .equal, toItem: messageLabel, attribute: .centerY, multiplier: 1.0, constant: 0.0),
             NSLayoutConstraint(item: resetButton, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1.0, constant: 80.0),
 
@@ -274,6 +271,13 @@ public class GameViewController: UIViewController, UITableViewDataSource, UITabl
             NSLayoutConstraint(item: titleLabel, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1.0, constant: 80.0),
         ]
 
+        let messageLabelConstraints = [
+            NSLayoutConstraint(item: messageLabel, attribute: .leading, relatedBy: .equal, toItem: titleLabel, attribute: .trailing, multiplier: 1.0, constant: 10.0),
+            NSLayoutConstraint(item: messageLabel, attribute: .trailing, relatedBy: .equal, toItem: mazeView, attribute: .trailing, multiplier: 1.0, constant: 0.0),
+            NSLayoutConstraint(item: messageLabel, attribute: .top, relatedBy: .equal, toItem: view, attribute: .top, multiplier: 1.0, constant: 20.0),
+            NSLayoutConstraint(item: messageLabel, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1.0, constant: 40.0),
+        ]
+
         let run100TimesProgressBarConstraints = [
             NSLayoutConstraint(item: run100TimesProgressBar, attribute: .leading, relatedBy: .equal, toItem: mazeView, attribute: .leading, multiplier: 1.0, constant: 0.0),
             NSLayoutConstraint(item: run100TimesProgressBar, attribute: .trailing, relatedBy: .equal, toItem: mazeView, attribute: .trailing, multiplier: 1.0, constant: 0.0),
@@ -286,8 +290,8 @@ public class GameViewController: UIViewController, UITableViewDataSource, UITabl
         ]
 
         let tableViewConstraints = [
-            NSLayoutConstraint(item: statsTableView, attribute: .leading, relatedBy: .equal, toItem: view, attribute: .leading, multiplier: 1.0, constant: 50.0),
-            NSLayoutConstraint(item: statsTableView, attribute: .trailing, relatedBy: .equal, toItem: view, attribute: .trailing, multiplier: 1.0, constant: -50.0),
+            NSLayoutConstraint(item: statsTableView, attribute: .leading, relatedBy: .equal, toItem: mazeView, attribute: .leading, multiplier: 1.0, constant: 0.0),
+            NSLayoutConstraint(item: statsTableView, attribute: .trailing, relatedBy: .equal, toItem: mazeView, attribute: .trailing, multiplier: 1.0, constant: 0.0),
             NSLayoutConstraint(item: statsTableView, attribute: .top, relatedBy: .equal, toItem: mazeView, attribute: .bottom, multiplier: 1.0, constant: 20.0),
             NSLayoutConstraint(item: statsTableView, attribute: .bottom, relatedBy: .equal, toItem: view, attribute: .bottom, multiplier: 1.0, constant: -20.0),
 
@@ -296,6 +300,7 @@ public class GameViewController: UIViewController, UITableViewDataSource, UITabl
         view.addConstraints(mazeViewConstraints)
         view.addConstraints(buttonConstraints)
         view.addConstraints(titleLabelConstraints)
+        view.addConstraints(messageLabelConstraints)
         view.addConstraints(run100TimesProgressBarConstraints)
         view.addConstraints(tableViewConstraints)
     }
