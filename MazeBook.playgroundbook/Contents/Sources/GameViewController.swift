@@ -24,6 +24,8 @@ public class GameViewController: UIViewController, UITableViewDataSource, UITabl
 
     private var isRunning100TimesTest = false
 
+    private var pathNode: SKShapeNode?
+
     private var durationStats = [String : String]() {
         didSet {
             self.statsTableView.reloadData()
@@ -111,11 +113,22 @@ public class GameViewController: UIViewController, UITableViewDataSource, UITabl
 
                 self.durationStats["Duration"] = Utilities.string(fromTimeInterval: pathResult.duration)
 
+
+                let path = UIBezierPath()
+                path.move(to: start.center)
                 for location in pathResult.path {
-                    start.mazeScene?.tile(atLocation: location).showPathIndicator = true
+                    if let tile = start.mazeScene?.tile(atLocation: location) {
+                        //tile.showPathIndicator = true
+                        path.addLine(to: tile.center)
+                    }
                 }
 
-                let resetColor = SKAction.colorize(with: .lightGray, colorBlendFactor: 1.0, duration: ColorChangeDuration)
+                self.pathNode = SKShapeNode(path: path.cgPath)
+                self.pathNode?.lineWidth = 5
+                self.pathNode?.strokeColor = .red
+                start.mazeScene?.grid.addChild(self.pathNode!)
+
+                let resetColor = SKAction.colorize(with: .white, colorBlendFactor: 1.0, duration: ColorChangeDuration)
                 start.run(resetColor)
                 end.run(resetColor)
             }
@@ -130,6 +143,8 @@ public class GameViewController: UIViewController, UITableViewDataSource, UITabl
 
         startTile = nil
         endTile = nil
+
+        pathNode?.removeFromParent()
 
         self.durationStats = [:]
         self.isRunning100TimesTest = false

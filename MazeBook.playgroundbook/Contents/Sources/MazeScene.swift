@@ -14,7 +14,7 @@ public class MazeScene : SKScene {
     public private(set) var allPathNodes = [GKGraphNode2D]()
     public private(set) var allWallNodes = [GKGraphNode2D]()
 
-    private let grid = SKNode()
+    public let grid = SKNode()
 
     public let maze: MazeData
 
