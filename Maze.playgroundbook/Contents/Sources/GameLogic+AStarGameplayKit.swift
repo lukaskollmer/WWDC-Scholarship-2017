@@ -1,3 +1,12 @@
+//
+//  GameLogic+AStarGameplayKit.swift
+//  Maze.playgroundbook
+//
+//  Created by Lukas Kollmer on 06/03/2017.
+//  Copyright © 2017 Lukas Kollmer. All rights reserved.
+//
+
+
 import Foundation
 import GameplayKit
 

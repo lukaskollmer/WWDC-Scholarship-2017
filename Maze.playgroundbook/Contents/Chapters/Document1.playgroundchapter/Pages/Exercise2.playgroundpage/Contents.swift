@@ -1,8 +1,10 @@
 //#-hidden-code
 //
 //  Contents.swift
+//  Maze.playgroundbook
 //
-//  Copyright (c) 2017 Lukas Kollmer. All Rights Reserved.
+//  Created by Lukas Kollmer on 06/03/2017.
+//  Copyright © 2017 Lukas Kollmer. All rights reserved.
 //
 //#-end-hidden-code
 /*:
