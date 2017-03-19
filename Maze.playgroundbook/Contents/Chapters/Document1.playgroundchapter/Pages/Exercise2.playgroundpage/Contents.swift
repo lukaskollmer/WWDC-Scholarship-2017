@@ -39,14 +39,16 @@
 
 import PlaygroundSupport
 
-var _playGameCalled = false
 
-/// Starts the Battleship game.
-func playGame() {
-    _playGameCalled = true
+func playGame(_ algorithm: GameLogic.Algorithm) {
+    let viewController = GameViewController()
+    viewController.algorithm = algorithm
+    viewController.hints = ["Try comparing different neighboring tiles based on their distance to the destination."]
+    PlaygroundPage.current.liveView = viewController
 }
 
 //#-end-hidden-code
+
 //#-editable-code
 
 func findPath(startTile: Tile, endTile: Tile) -> [TileLocation] {
@@ -55,14 +57,5 @@ func findPath(startTile: Tile, endTile: Tile) -> [TileLocation] {
     return []
 }
 
-playGame()
+playGame(.custom(findPath))
 //#-end-editable-code
-
-//#-hidden-code
-if _playGameCalled {
-    let viewController = GameViewController()
-    viewController.algorithm = .custom(findPath)
-    viewController.hints = ["Try comparing different neighboring tiles based on their distance to the destination."]
-    PlaygroundPage.current.liveView = viewController
-}
-//#-end-hidden-code

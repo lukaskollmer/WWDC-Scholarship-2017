@@ -30,23 +30,15 @@
 
 import PlaygroundSupport
 
-var _playGameCalled = false
 
-func playGame() {
-    _playGameCalled = true
+func playGame(_ algorithm: GameLogic.Algorithm) {
+    let viewController = GameViewController()
+    viewController.algorithm = algorithm
+    PlaygroundPage.current.liveView = viewController
 }
 
 //#-end-hidden-code
 //#-editable-code
 
-playGame()
+playGame(.A_star)
 //#-end-editable-code
-//#-hidden-code
-
-if _playGameCalled {
-    let viewController = GameViewController()
-    viewController.algorithm = .A_star
-    PlaygroundPage.current.liveView = viewController
-}
-
-//#-end-hidden-code
