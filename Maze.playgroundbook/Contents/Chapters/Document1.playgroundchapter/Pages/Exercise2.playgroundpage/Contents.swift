@@ -8,9 +8,7 @@
 //
 //#-end-hidden-code
 /*:
- **Goal:** Write an algorithm to find the shortest path between two tiles as efficently as possible
-
- In this exercise, you'll write code that gives the path between two tiles. Tap _Run My Code_ to reload the game with your new algorithm.
+ **Goal:** In this exercise, you'll write code that gives the path between two tiles.
 
  Select two tiles to calculate the path between them. You can also use the _Run 100x_ button to gather a larger sample size.
  The stats view below the maze will display the average duration across all 100 runs, as well as the duration of the fastest and the slowest run.
