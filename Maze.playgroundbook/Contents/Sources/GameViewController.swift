@@ -17,7 +17,7 @@ let ColorChangeDuration: TimeInterval = 0.1
 
 public class GameViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
-    public var algorithm: GameLogic.Algorithm = .stupid // TODO dont use .stupid
+    public var algorithm: GameLogic.Algorithm = .A_star
 
     public var successMessage: String?
     public var hints: [String]?
