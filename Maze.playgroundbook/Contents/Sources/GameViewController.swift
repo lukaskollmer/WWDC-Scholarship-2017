@@ -17,6 +17,13 @@ let ColorChangeDuration: TimeInterval = 0.1
 
 public class GameViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
+    public enum GameViewControllerMode {
+        case introduction
+        case maze
+    }
+
+    public let mode: GameViewControllerMode
+
     public var algorithm: GameLogic.Algorithm = .A_star
 
     public var successMessage: String?
@@ -34,6 +41,8 @@ public class GameViewController: UIViewController, UITableViewDataSource, UITabl
     let titleLabel = UILabel()
     let messageLabel = UILabel()
 
+    let introductionMessageLabel = UILabel()
+
     let statsTableView = UITableView(frame: .zero, style: .plain)
 
     private var isRunning100TimesTest = false
@@ -49,6 +58,16 @@ public class GameViewController: UIViewController, UITableViewDataSource, UITabl
     var startTile: Tile?
     var endTile: Tile?
 
+    public init(mode: GameViewControllerMode) {
+        self.mode = mode
+
+        super.init(nibName: nil, bundle: nil)
+    }
+
+    required public init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
     public override func loadView() {
         super.loadView()
 
@@ -60,6 +79,12 @@ public class GameViewController: UIViewController, UITableViewDataSource, UITabl
         titleLabel.font = .boldSystemFont(ofSize: 25)
 
         messageLabel.text = "by Lukas Kollmer"
+
+        introductionMessageLabel.text = "Tap Run My Code to start"
+        introductionMessageLabel.textColor = .introductionMessage
+        introductionMessageLabel.font = .systemFont(ofSize: 24)
+        introductionMessageLabel.textAlignment = .center
+        introductionMessageLabel.numberOfLines = 0
 
         [resetButton, run100TimesButton].forEach {
             $0.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
@@ -87,69 +112,22 @@ public class GameViewController: UIViewController, UITableViewDataSource, UITabl
 
         setupAutoLayout()
 
-        [mazeView, statsTableView, titleLabel, messageLabel, run100TimesButton, run100TimesProgressBar, run100TimesProgressLabel, resetButton].forEach {
+        [mazeView, statsTableView, titleLabel, messageLabel, run100TimesButton, run100TimesProgressBar, run100TimesProgressLabel, resetButton, introductionMessageLabel].forEach {
             $0.translatesAutoresizingMaskIntoConstraints = false
             self.view.addSubview($0)
         }
 
-        // TODO Register observer and remove in deinit
-        NotificationCenter.default.addObserver(forName: .didTapTile, object: nil, queue: nil) { notification in
-            guard let selectedTile = notification.userInfo?["tile"] as? Tile else { return }
-
-            // Only allow selection of path tiles
-            guard selectedTile.state == .path else { return }
-
-            // Can't go to the same tile
-            guard self.startTile?.location != selectedTile.location else { return }
-            var tileColor: UIColor = .white
-
-            setTiles: do {
-                if self.startTile == nil {
-                    self.startTile = selectedTile
-                    tileColor = .lightGray
-                    break setTiles
-                }
-
-                if self.endTile == nil {
-                    self.endTile = selectedTile
-                    tileColor = .white
-                    break setTiles
-                }
+        if self.mode == .introduction {
+            [mazeView, statsTableView, run100TimesButton, resetButton, run100TimesProgressBar, run100TimesProgressLabel].forEach {
+                $0.removeFromSuperview()
             }
-
-            let colorize = SKAction.colorize(with: tileColor, colorBlendFactor: 1, duration: ColorChangeDuration)
-            selectedTile.run(colorize)
-
-            if let start = self.startTile, let end = self.endTile {
-                self.run100TimesButton.isHidden = false
-
-                let pathResult = GameLogic.findPath(from: start, to: end, using: self.algorithm)
-
-                if pathResult.path.isEmpty, let hints = self.hints {
-                    PlaygroundPage.current.assessmentStatus = .fail(hints: hints, solution: self.solution)
-                } // TODO implement else (.success)
-
-                self.durationStats["Duration"] = Utilities.string(fromTimeInterval: pathResult.duration)
-
-
-                let path = UIBezierPath()
-                path.move(to: start.center)
-                for location in pathResult.path {
-                    if let tile = start.mazeScene?.tile(atLocation: location) {
-                        path.addLine(to: tile.center)
-                    }
-                }
-
-                self.pathNode = SKShapeNode(path: path.cgPath)
-                self.pathNode?.lineWidth = 5
-                self.pathNode?.strokeColor = .red
-                start.mazeScene?.grid.addChild(self.pathNode!)
-
-                let resetColor = SKAction.colorize(with: .white, colorBlendFactor: 1.0, duration: ColorChangeDuration)
-                start.run(resetColor)
-                end.run(resetColor)
-            }
+            //self.introductionMessageLabel.translatesAutoresizingMaskIntoConstraints = false
+            //self.view.addSubview(self.introductionMessageLabel)
+        } else {
+            introductionMessageLabel.removeFromSuperview()
+            registerTileTapHandler()
         }
+
     }
 
     @objc private func resetMaze() {
@@ -225,6 +203,67 @@ public class GameViewController: UIViewController, UITableViewDataSource, UITabl
                         self.durationStats["Maximum"] = Utilities.string(fromTimeInterval: durations.last!)
                     }
                 }
+            }
+        }
+    }
+
+    private func registerTileTapHandler() {
+        // TODO Register observer and remove in deinit
+        NotificationCenter.default.addObserver(forName: .didTapTile, object: nil, queue: nil) { notification in
+            guard let selectedTile = notification.userInfo?["tile"] as? Tile else { return }
+
+            // Only allow selection of path tiles
+            guard selectedTile.state == .path else { return }
+
+            // Can't go to the same tile
+            guard self.startTile?.location != selectedTile.location else { return }
+            var tileColor: UIColor = .white
+
+            setTiles: do {
+                if self.startTile == nil {
+                    self.startTile = selectedTile
+                    tileColor = .lightGray
+                    break setTiles
+                }
+
+                if self.endTile == nil {
+                    self.endTile = selectedTile
+                    tileColor = .white
+                    break setTiles
+                }
+            }
+
+            let colorize = SKAction.colorize(with: tileColor, colorBlendFactor: 1, duration: ColorChangeDuration)
+            selectedTile.run(colorize)
+
+            if let start = self.startTile, let end = self.endTile {
+                self.run100TimesButton.isHidden = false
+
+                let pathResult = GameLogic.findPath(from: start, to: end, using: self.algorithm)
+
+                if pathResult.path.isEmpty, let hints = self.hints {
+                    PlaygroundPage.current.assessmentStatus = .fail(hints: hints, solution: self.solution)
+                } // TODO implement else (.success)
+
+                self.durationStats["Duration"] = Utilities.string(fromTimeInterval: pathResult.duration)
+
+
+                let path = UIBezierPath()
+                path.move(to: start.center)
+                for location in pathResult.path {
+                    if let tile = start.mazeScene?.tile(atLocation: location) {
+                        path.addLine(to: tile.center)
+                    }
+                }
+
+                self.pathNode = SKShapeNode(path: path.cgPath)
+                self.pathNode?.lineWidth = 5
+                self.pathNode?.strokeColor = .red
+                start.mazeScene?.grid.addChild(self.pathNode!)
+
+                let resetColor = SKAction.colorize(with: .white, colorBlendFactor: 1.0, duration: ColorChangeDuration)
+                start.run(resetColor)
+                end.run(resetColor)
             }
         }
     }
@@ -312,7 +351,13 @@ public class GameViewController: UIViewController, UITableViewDataSource, UITabl
             NSLayoutConstraint(item: statsTableView, attribute: .trailing, relatedBy: .equal, toItem: mazeView, attribute: .trailing, multiplier: 1.0, constant: 0.0),
             NSLayoutConstraint(item: statsTableView, attribute: .top, relatedBy: .equal, toItem: mazeView, attribute: .bottom, multiplier: 1.0, constant: 20.0),
             NSLayoutConstraint(item: statsTableView, attribute: .bottom, relatedBy: .equal, toItem: view, attribute: .bottom, multiplier: 1.0, constant: -20.0),
+        ]
 
+        let introductionMessageLabelConstraints = [
+            NSLayoutConstraint(item: introductionMessageLabel, attribute: .leading, relatedBy: .equal, toItem: view, attribute: .leading, multiplier: 1.0, constant: 0.0),
+            NSLayoutConstraint(item: introductionMessageLabel, attribute: .trailing, relatedBy: .equal, toItem: view, attribute: .trailing, multiplier: 1.0, constant: 0.0),
+            NSLayoutConstraint(item: introductionMessageLabel, attribute: .top, relatedBy: .equal, toItem: view, attribute: .top, multiplier: 1.0, constant: 0.0),
+            NSLayoutConstraint(item: introductionMessageLabel, attribute: .bottom, relatedBy: .equal, toItem: view, attribute: .bottom, multiplier: 1.0, constant: 0.0),
         ]
 
         view.addConstraints(mazeViewConstraints)
@@ -321,5 +366,6 @@ public class GameViewController: UIViewController, UITableViewDataSource, UITabl
         view.addConstraints(messageLabelConstraints)
         view.addConstraints(run100TimesProgressBarConstraints)
         view.addConstraints(tableViewConstraints)
+        view.addConstraints(introductionMessageLabelConstraints)
     }
 }

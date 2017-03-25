@@ -5,14 +5,14 @@
 	<key>Version</key>
 	<string>1.0</string>
 	<key>Name</key>
-	<string>Exercise: Breadth-first algorithm</string>
+	<string>Solution: Breadth-first algorithm</string>
 	<key>Description</key>
 	<string>TODO: Description</string>
 	<key>LiveViewMode</key>
-	<string>VisibleByDefault</string>
+	<string>HiddenByDefault</string>
 	<key>LiveViewEdgeToEdge</key>
 	<true/>
 	<key>PlaygroundLoggingMode</key>
-	<string>Normal</string>
+	<string>Off</string>
 </dict>
 </plist>

@@ -34,7 +34,7 @@ import PlaygroundSupport
 
 
 func solveMaze(_ algorithm: GameLogic.Algorithm) {
-    let viewController = GameViewController()
+    let viewController = GameViewController(mode: .maze)
     viewController.algorithm = algorithm
     PlaygroundPage.current.liveView = viewController
 }

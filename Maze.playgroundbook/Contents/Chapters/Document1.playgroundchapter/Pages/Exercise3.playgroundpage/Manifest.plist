@@ -5,14 +5,14 @@
 	<key>Version</key>
 	<string>1.0</string>
 	<key>Name</key>
-	<string>A* Example Algorithm</string>
+	<string>Exercise: A* algorithm</string>
 	<key>Description</key>
 	<string>TODO: Description</string>
 	<key>LiveViewMode</key>
-	<string>HiddenByDefault</string>
+	<string>VisibleByDefault</string>
 	<key>LiveViewEdgeToEdge</key>
 	<true/>
 	<key>PlaygroundLoggingMode</key>
-	<string>Off</string>
+	<string>Normal</string>
 </dict>
 </plist>

@@ -37,3 +37,7 @@ public extension UnitDuration {
         return UnitDuration(symbol: "ms", converter: UnitConverterLinear(coefficient: 1/1000))
     }
 }
+
+public func toString<T: CustomStringConvertible>(_ obj: T) -> String {
+    return obj.description
+}

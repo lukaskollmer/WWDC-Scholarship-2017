@@ -28,7 +28,7 @@ public struct GameLogic {
         }
     }
 
-    public struct PathAlgoritmResult {
+    public struct PathAlgoritmResult { //TODO Fix typo
         public let path: [TileLocation]
         public let duration: TimeInterval
     }

@@ -25,7 +25,7 @@
  import PlaygroundSupport
 
  func solveMaze(_ algorithm: GameLogic.Algorithm) {
-     let viewController = GameViewController()
+     let viewController = GameViewController(mode: .maze)
      viewController.algorithm = algorithm
      viewController.hints = ["Try comparing different neighboring tiles based on their distance to the destination."]
      PlaygroundPage.current.liveView = viewController

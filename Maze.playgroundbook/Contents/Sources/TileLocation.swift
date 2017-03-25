@@ -17,6 +17,8 @@ public struct TileLocation {
     public let row: Int
     public let column: Int
 
+    public static let invalid = TileLocation(row: -1, column: -1)
+
     public init(row: Int, column: Int) {
         self.row = row
         self.column = column
@@ -43,11 +45,20 @@ public struct TileLocation {
     }
 }
 
-
-// MARK: Equation
+extension TileLocation: CustomStringConvertible {
+    public var description: String {
+        return "TileLocation(row: \(self.row), column: \(self.column))"
+    }
+}
 
 extension TileLocation : Equatable { }
 
 public func ==(lhs: TileLocation, rhs: TileLocation) -> Bool {
     return lhs.row == rhs.row && lhs.column == rhs.column
+}
+
+extension TileLocation: Hashable {
+    public var hashValue: Int {
+        return self.description.hashValue
+    }
 }

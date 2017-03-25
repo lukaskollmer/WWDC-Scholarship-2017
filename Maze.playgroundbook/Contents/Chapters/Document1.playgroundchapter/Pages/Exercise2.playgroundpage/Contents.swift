@@ -8,7 +8,7 @@
 //
 //#-end-hidden-code
 /*:
- **Goal:** In this exercise, you'll write code that gives the path between two tiles.
+ **Goal:** In this exercise, you'll write code that gives the path between two tiles using the breadth-first algorithm.
 
  Select two tiles to calculate the path between them. You can also use the _Run 100x_ button to gather a larger sample size.
  The stats view below the maze will display the average duration across all 100 runs, as well as the duration of the fastest and the slowest run.
@@ -41,7 +41,7 @@ import PlaygroundSupport
 
 
 func solveMaze(_ algorithm: GameLogic.Algorithm) {
-    let viewController = GameViewController()
+    let viewController = GameViewController(mode: .maze)
     viewController.algorithm = algorithm
     viewController.hints = ["Try comparing different neighboring tiles based on their distance to the destination."]
     PlaygroundPage.current.liveView = viewController
