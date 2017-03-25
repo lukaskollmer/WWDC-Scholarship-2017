@@ -7,7 +7,8 @@
   - Introduction to different pathfinding algorithms
     - How do they work/differ from each other
     - Use cases?
-  - Develop a custom pathfinding algorithm (This doesn't need to be Dijkstra or A*)
+  - Develop 2 custom pathfinding algorithms, Breadth-first and a* (That's irrelevant tho, as long as it can solve the maze)
+  - Showcase an example implementation of Breadth-first
   - Showcase an example implementation of A*
 
 
@@ -15,10 +16,10 @@
 
 1. Chapter: Introduction & Challenges
   - Introduction
-  - Empty page to write custom algorithm
-  - ?Empty page to write Breadth-first algorithm?
+  - Empty page to write Breadth-first algorithm
+  - Empty page to write A* algorithm
 
 2. Chapter: Solutions
+  - Breadth-first example implementation
   - A* example implementation
-  - ?Breadth-first example implementation?
 
