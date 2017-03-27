@@ -17,14 +17,14 @@ private final class IndirectWrapper<T> {
     }
 }
 
-public struct Indirect<T> {
+struct Indirect<T> {
     private var wrapper : IndirectWrapper<T>
 
-    public init(_ value: T) {
+    init(_ value: T) {
         wrapper = IndirectWrapper(value)
     }
 
-    public var value : T {
+    var value : T {
         get {
             return wrapper.value
         }
