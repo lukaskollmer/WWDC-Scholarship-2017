@@ -100,8 +100,6 @@ public class Tile : SKSpriteNode {
     }
 }
 
-//extension Tile : Equatable { }
-
 public func ==(lhs: Tile, rhs: Tile) -> Bool {
     return lhs.location == rhs.location
 }
