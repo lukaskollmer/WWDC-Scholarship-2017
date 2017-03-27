@@ -8,7 +8,7 @@
 //
 //#-end-hidden-code
 /*:
- **Goal:** Write an algorithm to find the shortest path between two tiles as efficently as possible
+ **Solution:** A*-Algorithm
 
  This is an example implementation of the A* pathfinding algorithm. It works by assigning a weight to each tile. This weight is equal to the distance between that tile and the initial tile, plus the distance between that tile and the destination tile. This weight represents a possible minimum distance between the initial tile and the destination tile. As a consequence of this, all paths with a greater weight can be discarded.
 
@@ -76,7 +76,6 @@
      }
      return []
  }
-
 
 
  solveMaze(.custom(findPath))

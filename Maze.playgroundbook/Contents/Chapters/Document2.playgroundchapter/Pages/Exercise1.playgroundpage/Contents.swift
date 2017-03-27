@@ -8,8 +8,11 @@
 //
 //#-end-hidden-code
 /*:
- **Goal:** Breadth-first implementation
- _Please note that, due to the way Swift Playgrounds works, extensive use of the `print` function will slow down your algorithm by a lot._
+ **Solution:** Breadth-first implementation
+
+ This is an example-implementation of the [Breadth-first](glossary://Breadth-first%20search) pathfinding algorithm. It works by starting on the root level and then looking at each subsequent level of children nodes, until it finds the destination node.
+
+ Unlike the A*-Algorithm, this does not use heuristics, since it doesn't assign weight to individual nodes.
 
 
  */
@@ -24,7 +27,7 @@ import Foundation
 func solveMaze(_ algorithm: GameLogic.Algorithm) {
     let viewController = GameViewController(mode: .maze)
     viewController.algorithm = algorithm
-    viewController.hints = ["Try comparing different neighboring tiles based on their distance to the destination."]
+    viewController.hints = ["Try comparing different neighboring tiles based on their distance to the destination."] // TODO change hint to something Breadth-first related
     PlaygroundPage.current.liveView = viewController
 }
 
