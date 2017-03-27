@@ -38,19 +38,19 @@
      guard let maze = from.mazeScene else { return [] }
 
      var closedSteps = Set<PathStep>()
-     var openSteps = [PathStep(position: from.location)]
+     var openSteps = [PathStep(location: from.location)]
 
      while !openSteps.isEmpty {
          let currentStep = openSteps.remove(at: 0)
          closedSteps.insert(currentStep)
 
-         if currentStep.position == to.location {
+         if currentStep.location == to.location {
              return currentStep.path
          }
 
-         let neighboringLocations = maze.tile(atLocation: currentStep.position).neighboringTiles.filter { maze.tile(atLocation: $0).state == .path }
+         let neighboringLocations = maze.tile(atLocation: currentStep.location).neighboringTiles.filter { maze.tile(atLocation: $0).state == .path }
          for location in neighboringLocations {
-             var step = PathStep(position: location)
+             var step = PathStep(location: location)
              if closedSteps.contains(step) {
                  continue
              }
@@ -68,7 +68,7 @@
                  }
              } else {
                  step.set(parent: currentStep, moveCost: moveCost)
-                 step.h = PathStep.h(from: step.position, to: to.location)
+                 step.h = PathStep.h(from: step.location, to: to.location)
                  openSteps.append(step)
                  openSteps.sort { $0.score <= $1.score }
              }
@@ -77,52 +77,6 @@
      return []
  }
 
- struct PathStep: Hashable {
-     // Movement cost from start to current tile
-     var g = 0
-
-     // Movement cost from current tile to destination
-     var h = 0
-
-     var score: Int {
-         return h + h
-     }
-
-     var hashValue: Int {
-         return position.column.hashValue + position.row.hashValue
-     }
-
-     var position: TileLocation
-     private(set) var parent: Indirect<PathStep>?
-
-     init(position: TileLocation) {
-         self.position = position
-     }
-
-     mutating func set(parent: PathStep, moveCost: Int) {
-         self.parent = Indirect<PathStep>(parent)
-         self.g = parent.g + moveCost
-     }
-
-
-     var path: [TileLocation] {
-         var path = [TileLocation]()
-         var currentStep = self
-         while let parent = currentStep.parent {
-             path.insert(currentStep.position, at: 0)
-             currentStep = parent.value
-         }
-         return path
-     }
-
-     static func h(from: TileLocation, to: TileLocation) -> Int {
-         return abs(to.column - from.column) + abs(to.row - from.row)
-     }
- }
-
- func ==(lhs: PathStep, rhs: PathStep) -> Bool {
-     return lhs.position == rhs.position
- }
 
 
  solveMaze(.custom(findPath))

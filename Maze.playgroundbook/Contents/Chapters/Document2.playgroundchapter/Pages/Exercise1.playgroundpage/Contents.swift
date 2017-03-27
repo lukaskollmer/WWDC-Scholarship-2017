@@ -32,36 +32,10 @@ func solveMaze(_ algorithm: GameLogic.Algorithm) {
 
 //#-editable-code
 
-struct PathStep: Hashable {
-    let location: TileLocation
-    var previous: Indirect<PathStep>?
-
-    init(location: TileLocation) {
-        self.location = location
-    }
-
-    var hashValue: Int {
-        return self.location.hashValue
-    }
-
-    var path: [TileLocation] {
-        var path = [TileLocation]()
-        var currentStep = self
-        while let parent = currentStep.previous {
-            path.insert(currentStep.location, at: 0)
-            currentStep = parent.value
-        }
-        return path
-    }
-}
-
-func ==(lhs: PathStep, rhs: PathStep) -> Bool {
-    return lhs.location == rhs.location
-}
-
 func findPath(startTile: Tile, endTile: Tile) -> [TileLocation] {
     guard let maze = startTile.mazeScene else { return [] }
 
+    // All TileLocations that still need to be explored
     var queue = Array<PathStep>()
     queue.append(PathStep(location: startTile.location))
 
@@ -86,12 +60,12 @@ func findPath(startTile: Tile, endTile: Tile) -> [TileLocation] {
 
             if let existingIndex = queue.index(of: step) {
                 var step = queue[existingIndex]
-                step.previous = Indirect<PathStep>(currentStep)
+                step.parent = currentStep
 
                 queue.remove(at: existingIndex)
                 queue.append(step)
             } else {
-                step.previous = Indirect<PathStep>(currentStep)
+                step.parent = currentStep
                 queue.append(step)
             }
 
