@@ -8,7 +8,7 @@
 //
 //#-end-hidden-code
 /*:
- **Solution:** Breadth-first implementation
+ **Solution:** Breadth-first algorithm
 
  This is an example-implementation of the [Breadth-first](glossary://Breadth-first%20search) pathfinding algorithm. It works by starting on the root level and then looking at each subsequent level of children nodes, until it finds the destination node.
 
@@ -53,7 +53,7 @@ func findPath(startTile: Tile, endTile: Tile) -> [TileLocation] {
         }
 
         for location in maze.tile(atLocation: currentStep.location).neighboringTiles {
-            guard maze.tile(atLocation: location).state == .path else { continue }
+            guard location.state(inMaze: maze) == .path else { continue }
 
             var step = PathStep(location: location)
 

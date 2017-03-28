@@ -43,6 +43,15 @@ public struct TileLocation {
 
         return (self.column + 1) <= inMaze.numberOfColumns && (self.row + 1) <= inMaze.numberOfRows
     }
+
+    // TODO test this
+    public func state(inMaze: MazeData) -> TileState {
+        return inMaze.data[self.row][self.column]
+    }
+
+    public func state(inMaze: MazeScene) -> TileState {
+        return inMaze.tile(atLocation: self).state
+    }
 }
 
 extension TileLocation: CustomStringConvertible {
