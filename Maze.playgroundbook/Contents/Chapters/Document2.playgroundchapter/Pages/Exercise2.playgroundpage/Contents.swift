@@ -50,17 +50,15 @@
 
          for location in maze.tile(atLocation: currentStep.location).neighboringTiles {
              guard location.state(inMaze: maze) == .path else { continue }
-             
+
              var step = PathStep(location: location)
              if closedSteps.contains(step) {
                  continue
              }
 
-             let moveCost = 1 // Move cost is always 1 because we can only make one step at a time
-
              if let existingIndex = openSteps.index(of: step) {
                  var step = openSteps[existingIndex]
-                 if currentStep.score + moveCost < step.score {
+                 if currentStep.score + 1 < step.score { // 1 is the move cost to the next tile
                      step.set(parent: currentStep, moveCost: moveCost)
 
                      openSteps.remove(at: existingIndex)
