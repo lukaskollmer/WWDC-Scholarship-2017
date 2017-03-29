@@ -49,14 +49,14 @@ func findPath(startTile: Tile, endTile: Tile) -> [TileLocation] {
         exploredSteps.insert(currentStep)
 
         if currentStep.location == endTile.location {
-            maze.clearAllExploredTiles()
+            //maze.clearAllExploredTiles()
             return currentStep.path
         }
 
         for location in maze.tile(atLocation: currentStep.location).neighboringTiles {
             guard location.state(inMaze: maze) == .path else { continue }
 
-            maze.tile(atLocation: location).markExplored()
+            //maze.tile(atLocation: location).markExplored()
 
             var step = PathStep(location: location)
 
