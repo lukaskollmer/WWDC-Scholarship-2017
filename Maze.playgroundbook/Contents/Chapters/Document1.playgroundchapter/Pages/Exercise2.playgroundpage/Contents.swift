@@ -26,9 +26,9 @@
 
  You can create new `TileLocation` objects either by using the `init(row: Int, column: Int)` initializer or by using the `advanced(by: Int, inDirection: Direction)` function.
 
- Tip: Use the `PathStep` struct to store individual steps of your path. A `PathStep` objects stores a `TileLocation` and a parent `PathStep` object. Use the `path` property to get an `Array<TileLocation>`. This walks through all `parent` steps, until it reaches the initial step.
+ Tip: Use the `PathStep` struct to store individual steps of your path. A `PathStep` objects stores a `TileLocation` and a parent `PathStep` object. Use the `path` property to get an `Array<TileLocation>` representing the entire path from the start tile to the current one. This walks through all `parent` steps, until it reaches the initial step.
 
- _Please note that, due to the way Swift Playgrounds works, extensive use of the `print` function will slow down your algorithm by a lot._
+ _Please note that due to the way Swift Playgrounds works, extensive use of the `print` function will slow down your algorithm by a lot._
 
 
  */

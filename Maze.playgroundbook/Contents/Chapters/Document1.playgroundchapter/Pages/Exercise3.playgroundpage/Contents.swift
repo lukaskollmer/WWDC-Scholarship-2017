@@ -15,7 +15,7 @@
 
  Similar to the previous exercise, you should use the built-in `PathStep` struct to store individual steps of your path. When you reach the destination tile, the `PathStep.path` array contains the entire path from the initial tile to the destination. (This works by walking backwards through the `PathStep.parent` tree).
 
- _Please note that, due to the way Swift Playgrounds works, extensive use of the `print` function will slow down your algorithm by a lot._
+ _Please note that due to the way Swift Playgrounds works, extensive use of the `print` function will slow down your algorithm by a lot._
 
  */
 //#-hidden-code
