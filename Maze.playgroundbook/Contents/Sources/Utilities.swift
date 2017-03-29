@@ -49,7 +49,7 @@ public func toString<T: CustomStringConvertible>(_ obj: T) -> String {
 
  (Should behave similar to Python's any function)
  */
-public func any<T: Equatable>(_ items: T?...) -> Bool {
+public func any<T>(_ items: T?...) -> Bool {
     for item in items {
         if (item != nil) {
             guard item is Bool else { return true }
