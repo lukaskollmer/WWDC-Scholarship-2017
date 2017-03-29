@@ -41,3 +41,22 @@ public extension UnitDuration {
 public func toString<T: CustomStringConvertible>(_ obj: T) -> String {
     return obj.description
 }
+
+/**
+ Check if any of the passed elements is true.
+ For regular objects, this will check whether the object is nonnull
+ For Bools, it will check if the bool is `true`
+
+ (Should behave similar to Python's any function)
+ */
+public func any<T: Equatable>(_ items: T?...) -> Bool {
+    for item in items {
+        if (item != nil) {
+            guard item is Bool else { return true }
+            if (item as! Bool) == true {
+                return true
+            }
+        }
+    }
+    return false
+}
