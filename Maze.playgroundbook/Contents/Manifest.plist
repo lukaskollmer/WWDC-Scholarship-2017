@@ -14,6 +14,8 @@
 	<string>me.kollmer.MazePlaygroundBook</string>
 	<key>DeploymentTarget</key>
 	<string>ios10.0</string>
+	<key>SwiftVersion</key>
+	<string>3.1</string>
 	<key>ImageReference</key>
 	<string>__dijkstra.png</string>
 	<key>Chapters</key>

@@ -10,9 +10,6 @@
 /*:
  **Goal:** In this exercise, you'll write code that gives the path between two tiles using the breadth-first algorithm.
 
- Select two tiles to calculate the path between them. You can also use the _Run 100x_ button to gather a larger sample size.
- The stats view below the maze will display the average duration across all 100 runs, as well as the duration of the fastest and the slowest run.
-
  Your pathfinding function takes two `Tile` objects as parameters and should return an `Array<TileLocation>` containing the locations of all tiles of the path.
 
  Please note that the maze has it's origin in the lower left corner.
