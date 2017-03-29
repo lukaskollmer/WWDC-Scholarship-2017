@@ -8,7 +8,10 @@
 
 import Foundation
 
-// Perform actions after each other, in the order they were added to the queue
+// Perform actions onw after another, in the order they were added to the queue
+// This is used by the live maze exploration progress thing (call `markExplored()` on each tile you explored and call `maze.clearAllExploredTiles()` once you've found a path)
+// The idea behind this is to have one shared SerialOperationQueue object for the entire playground, to make sure all maze exploration updated are executed in order, to visualize the progress.
+
 public class SerialOperationQueue {
     private let operationQueue = OperationQueue()
 
