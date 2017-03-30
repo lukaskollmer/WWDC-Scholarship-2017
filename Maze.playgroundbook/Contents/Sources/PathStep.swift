@@ -7,6 +7,7 @@
 //
 
 
+/// A struct describing a single step in a path through a maze
 public struct PathStep: Hashable {
     // Movement cost from start tile to current tile
     public var movementCostToCurrentLocation = 0
@@ -24,6 +25,7 @@ public struct PathStep: Hashable {
 
     public var location: TileLocation
 
+    /// The previous step
     public var parent: PathStep? {
         set {
             guard let newValue = newValue else {
@@ -39,16 +41,25 @@ public struct PathStep: Hashable {
     }
     private var wrappedParent: Indirect<PathStep>?
 
+    /// Initialize the step using the specified location
+    ///
+    /// - Parameter location: `TileLocation`
     public init(location: TileLocation) {
         self.location = location
     }
 
+    /// Set the parent of the step (parent = previous step)
+    ///
+    /// - Parameters:
+    ///   - parent: The Parent
+    ///   - moveCost: move cost from the parent to the current step
     public mutating func set(parent: PathStep, moveCost: Int) {
         self.parent = parent
         self.movementCostToCurrentLocation = parent.movementCostToCurrentLocation + moveCost
     }
 
 
+    /// A `[TileLocation]` containing the entire path.
     public var path: [TileLocation] {
         var path = [TileLocation]()
         var currentStep = self
@@ -59,6 +70,12 @@ public struct PathStep: Hashable {
         return path
     }
 
+    /// Calculate movement cost between two tiles
+    ///
+    /// - Parameters:
+    ///   - from: start `TileLocation`
+    ///   - to: end `TileLocation`
+    /// - Returns: movement cost between these two tiles
     public static func h(from: TileLocation, to: TileLocation) -> Int {
         return abs(to.column - from.column) + abs(to.row - from.row)
     }

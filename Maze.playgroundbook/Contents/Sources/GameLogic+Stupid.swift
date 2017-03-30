@@ -10,6 +10,12 @@
 import Foundation
 
 extension GameLogic {
+    /// Please don't use this one
+    ///
+    /// - Parameters:
+    ///   - from: Start Tile
+    ///   - to: End Tile
+    /// - Returns: `[TileLocation]`
     static func findPathStupid(from: Tile, to: Tile) -> [TileLocation] {
         guard let mazeScene = from.mazeScene else { return [] }
 

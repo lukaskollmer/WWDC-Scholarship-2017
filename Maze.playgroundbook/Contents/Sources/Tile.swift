@@ -11,6 +11,7 @@ import Foundation
 import SpriteKit
 
 
+/// A `Tile`s state (path or wall
 public enum TileState: Int {
     case path
     case wall
@@ -20,15 +21,21 @@ public enum TileState: Int {
     }
 }
 
+/// A Tile node
 public class Tile : SKSpriteNode {
 
+    /// The tile's scene
     public weak var mazeScene: MazeScene?
 
+    /// Current state of the tile
     public private(set) var state: TileState
+    
+    /// The Tile's location in the maze
     public let location: TileLocation
 
     private var notificationHandler: NSObjectProtocol?
 
+    /// A Boolean determining whether the tile should show a dot which can be used for showing a path through a maze
     public var showPathIndicator: Bool = false {
         didSet {
             guard state == .path else { return } // You can't walk on walls...
@@ -36,6 +43,7 @@ public class Tile : SKSpriteNode {
         }
     }
 
+    /// Tap handler
     var tapHandler: (() -> ())? = nil
     public let pathIndicator = SKShapeNode(circleOfRadius: 4)
 
@@ -45,6 +53,7 @@ public class Tile : SKSpriteNode {
         }
     }
 
+    /// `Array<TileLocation>` of all neighboring tiles (only those who are actually valid in the maze)
     public var neighboringTiles: [TileLocation] {
         guard let maze = self.mazeScene?.maze else { return [] }
 
@@ -58,6 +67,11 @@ public class Tile : SKSpriteNode {
         }
     }
 
+    /// Initialize a Tile at the specified location w/ the specified state
+    ///
+    /// - Parameters:
+    ///   - location: `TileLocation`
+    ///   - state: `TileState`
     init(location: TileLocation, state: TileState) {
         self.location = location
         self.state = state
@@ -84,6 +98,9 @@ public class Tile : SKSpriteNode {
         }
     }
 
+    /// Update the state
+    ///
+    /// - Parameter state: <#state description#>
     public func setState(_ state: TileState) {
         self.state = state
         self.color = state.color

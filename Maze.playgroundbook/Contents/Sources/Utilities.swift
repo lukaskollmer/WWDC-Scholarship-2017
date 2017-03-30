@@ -10,9 +10,10 @@
 import Foundation
 
 public struct Utilities {
-    /*
-     Convert a `TimeInterval` (in seconds) to a human readable string (in milliseconds)
-     */
+    /// Convert a `TimeInterval` (in seconds) to a human readable string (in milliseconds)
+    ///
+    /// - Parameter fromTimeInterval: `TimeInterval`
+    /// - Returns: `String`
     public static func string(fromTimeInterval: TimeInterval) -> String {
         let numberFormatter = NumberFormatter()
         numberFormatter.maximumFractionDigits = 5
@@ -42,13 +43,11 @@ public func toString<T: CustomStringConvertible>(_ obj: T) -> String {
     return obj.description
 }
 
-/**
- Check if any of the passed elements is true.
- For regular objects, this will check whether the object is nonnull
- For Bools, it will check if the bool is `true`
 
- (Should behave similar to Python's any function)
- */
+/// Return True if any of the passed objects is either non-null or true (Should behave similar to Python's any function)
+///
+/// - Parameter items: Some objects
+/// - Returns: `Bool`
 public func any<T>(_ items: T?...) -> Bool {
     for item in items {
         if (item != nil) {

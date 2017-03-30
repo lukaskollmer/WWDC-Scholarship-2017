@@ -12,52 +12,85 @@ import SpriteKit
 import PlaygroundSupport
 
 
+/// Default duration for the tile color change animation
 let ColorChangeDuration: TimeInterval = 0.1
 
 
+/// The Game's primary view controller. Use the initializer to choose whether you want an introduction view controller or a maze
 public class GameViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
+    /// The Game View Controller's mode
+    ///
+    /// - introduction: Shows an introduction message in the center of the screen, maze and stats are hidden.
+    /// - maze: Show the maze and stats, instead of the introduction message
     public enum GameViewControllerMode {
         case introduction
         case maze
     }
 
+    /// The mode
     public let mode: GameViewControllerMode
 
+    /// The algorithm to be used for solving the maze
     public var algorithm: GameLogic.Algorithm = .A_star
 
+    /// [PlaygroundSupport] success message to be displayed in the bottom right corner
     public var successMessage: String?
+    
+    /// [PlaygroundSupport] hints to be displayed in the bottom right corner
     public var hints: [String]?
+    
+    /// [PlaygroundSupport] solution text to be displayed in the bottom right corner
     public var solution: String?
 
+    /// The SKView containing the maze
     let mazeView = MazeView(frame: CGRect(x: 20, y: 20, width: 400, height: 400))
 
+    /// The reset button in the top right corner
     let resetButton = UIButton(type: UIButtonType.roundedRect)
+    /// The Run 100x button left of the reset button
     let run100TimesButton = UIButton(type: UIButtonType.roundedRect)
 
+    /// Run 100x progress bar displayed instead of the maze when you're running the 100x test
     let run100TimesProgressBar = UIProgressView()
+    
+    /// Run 100x progress label
     let run100TimesProgressLabel = UILabel()
 
+    /// Title label (in the top left corner, bold font)
     let titleLabel = UILabel()
+    
+    /// Message label (right to the title label, regular font)
     let messageLabel = UILabel()
 
+    /// introduction message label in the middle of the screen. (There's some bug in UIKit that causes the introduction message label to be 50% off-screen sometimes. No idea why and it isn't reproducible)
     let introductionMessageLabel = UILabel()
 
+    /// The table view below the maze. Assign values to the `durationStats` object to show new data in the table view
     let statsTableView = UITableView(frame: .zero, style: .plain)
 
+    /// A Boolean indicating whether you're currently running a 100x test
     private var isRunning100TimesTest = false
 
+    /// The `SKShapeNode` used to display the path through the maze
     private var pathNode: SKShapeNode?
 
+    /// Duration Stats. This is a `Dictionary<String, String>`. The stats table view is automatically reloaded when this dict changes
     private var durationStats = [String : String]() {
         didSet {
             self.statsTableView.reloadData()
         }
     }
 
+    /// The currently selected start tile
     var startTile: Tile?
+    
+    /// The currently selected end tile
     var endTile: Tile?
 
+    /// initialize the GameViewController using the specified mode
+    ///
+    /// - Parameter mode: The mode to be used (.introduction or .maze)
     public init(mode: GameViewControllerMode) {
         self.mode = mode
 
@@ -130,6 +163,7 @@ public class GameViewController: UIViewController, UITableViewDataSource, UITabl
 
     }
 
+    /// Reset the maze (remove all found paths and selected tiles, empty the stats table view)
     @objc private func resetMaze() {
         let resetColorAction = SKAction.colorize(with: .white, colorBlendFactor: 1.0, duration: ColorChangeDuration)
         [startTile, endTile].forEach { $0?.run(resetColorAction) }
@@ -146,6 +180,7 @@ public class GameViewController: UIViewController, UITableViewDataSource, UITabl
         self.run100TimesButton.isHidden = true
     }
 
+    /// Run the pathfinding algorithm 100 times to get a larger sample size
     @objc private func run100Times() {
         // Check if Tiles are selected and make sure that we aren't already running a 100x test
         guard let start = self.startTile, let end = self.endTile else { return }

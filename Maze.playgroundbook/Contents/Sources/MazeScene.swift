@@ -12,19 +12,34 @@ import UIKit
 import SpriteKit
 import GameplayKit
 
+/// The SpriteKit scene drawing a maze
 public class MazeScene : SKScene {
 
+    /// Number of rows in the maze
     public let numberOfRows: Int
+    
+    /// Number of columns in the maze
     public let numberOfColumns: Int
 
+    /// An array of all tiles, by row (you should use tile(atLocation:) or tile(atRow:column:) to get an individual tile
     private let tiles: [[Tile]]
+    
+    /// All tiles as a flat array
     public let allTiles: [Tile]
+    
+    /// An array of `GKGraphNode2D` objects representing all nodes in the maze
     public private(set) var allNodes = [GKGraphNode2D]()
+    
+    /// An array of `GKGraphNode2D` objects representing all path nodes in the maze
     public private(set) var allPathNodes = [GKGraphNode2D]()
+    
+    /// An array of `GKGraphNode2D` objects representing all wall nodes in the maze
     public private(set) var allWallNodes = [GKGraphNode2D]()
 
+    /// The grid containing all tiles
     public let grid = SKNode()
 
+    /// The maze's data
     public let maze: MazeData
 
     public override var size: CGSize {
@@ -33,6 +48,9 @@ public class MazeScene : SKScene {
         }
     }
 
+    /// Initialize a MazeScene using the specified maze
+    ///
+    /// - Parameter maze: A `MazeData` object
     required public init(maze: MazeData) {
         self.maze = maze
 
@@ -90,8 +108,12 @@ public class MazeScene : SKScene {
 
         arrangeTiles()
     }
+    
 
-    public func load(maze: MazeData) {
+    /// Load a MazeData object into the maze
+    ///
+    /// - Parameter maze: MazeData
+    private func load(maze: MazeData) {
         for column in 0..<numberOfColumns {
             for row in 0..<numberOfRows {
                 let tile = self.tile(atRow: row, column: column)
@@ -112,14 +134,25 @@ public class MazeScene : SKScene {
     }
 
 
+    /// Utility function for getting a specific tile
+    ///
+    /// - Parameters:
+    ///   - atRow: Row of the tile
+    ///   - column: Column of the tile
+    /// - Returns: `Tile`
     public func tile(atRow: Int, column: Int) -> Tile {
         return tile(atLocation: TileLocation(row: atRow, column: column))
     }
 
+    /// Utility function for getting a specific tile
+    ///
+    /// - Parameter atLocation: `TileLocation` object describing the location of the tile you want to get
+    /// - Returns: `Tile`
     public func tile(atLocation: TileLocation) -> Tile {
         return tiles[atLocation.row][atLocation.column]
     }
 
+    /// Resize all tiles and the grid
     private func arrangeTiles() {
         // Calculate the size of the tiles so they're square and file in the space available.
         var totalGridDimension = min(size.height, size.width)

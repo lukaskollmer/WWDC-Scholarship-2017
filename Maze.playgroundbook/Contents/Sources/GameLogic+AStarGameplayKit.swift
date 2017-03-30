@@ -16,6 +16,12 @@ func ==(_ lhs: vector_float2, _ rhs: vector_int2) -> Bool {
 
 
 extension GameLogic {
+    /// Find a path using GameplayKit's A* implementation
+    ///
+    /// - Parameters:
+    ///   - from: Start Tile
+    ///   - to: End Tile
+    /// - Returns: An `[TileLocation]` describing the path
     static func findAStar(from: Tile, to: Tile) -> [TileLocation] {
         guard let maze = from.mazeScene else { return [] }
 

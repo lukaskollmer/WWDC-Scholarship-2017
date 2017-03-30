@@ -11,7 +11,9 @@ import Foundation
 import UIKit
 import SpriteKit
 
+/// The MazeView containing the scene which draws the maze
 public class MazeView : SKView {
+    /// The scene
     private let mazeScene: MazeScene
 
     public override var frame: CGRect {

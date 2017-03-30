@@ -19,6 +19,9 @@ public class SerialOperationQueue {
         self.operationQueue.maxConcurrentOperationCount = 1
     }
 
+    /// Add a new operation to the queue
+    ///
+    /// - Parameter action: <#action description#>
     public func add(_ action: @escaping () -> Void) {
         self.operationQueue.addOperation(action)
     }
