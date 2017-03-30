@@ -6,17 +6,16 @@
 //  Copyright © 2017 Lukas Kollmer. All rights reserved.
 //
 
-// TODO: Use this in all examples, instead of the different existing ones.
 
 public struct PathStep: Hashable {
-    // Movement cost from start to current tile
-    public var g = 0
+    // Movement cost from start tile to current tile
+    public var movementCostToCurrentLocation = 0
 
-    // Movement cost from current tile to destination
-    public var h = 0
+    // Movement cost from current tile to destination tile
+    public var movementCostToDestination = 0
 
     public var score: Int {
-        return g + h
+        return movementCostToCurrentLocation + movementCostToDestination
     }
 
     public var hashValue: Int {
@@ -27,7 +26,10 @@ public struct PathStep: Hashable {
 
     public var parent: PathStep? {
         set {
-            guard let newValue = newValue else { return }
+            guard let newValue = newValue else {
+                self.wrappedParent = nil
+                return
+            }
             self.wrappedParent = Indirect<PathStep>(newValue)
         }
         get {
@@ -43,7 +45,7 @@ public struct PathStep: Hashable {
 
     public mutating func set(parent: PathStep, moveCost: Int) {
         self.parent = parent
-        self.g = parent.g + moveCost
+        self.movementCostToCurrentLocation = parent.movementCostToCurrentLocation + moveCost
     }
 
 

@@ -67,7 +67,7 @@
                  }
              } else {
                  step.set(parent: currentStep, moveCost: 1)
-                 step.h = PathStep.h(from: step.location, to: to.location)
+                 step.movementCostToCurrentLocation = PathStep.h(from: step.location, to: to.location)
                  openSteps.append(step)
                  openSteps.sort { $0.score <= $1.score }
              }
