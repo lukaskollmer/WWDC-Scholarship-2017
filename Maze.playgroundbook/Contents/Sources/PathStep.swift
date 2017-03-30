@@ -16,7 +16,7 @@ public struct PathStep: Hashable {
     public var h = 0
 
     public var score: Int {
-        return h + h
+        return g + h
     }
 
     public var hashValue: Int {
