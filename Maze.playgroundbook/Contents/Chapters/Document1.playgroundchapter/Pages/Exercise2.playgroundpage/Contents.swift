@@ -22,7 +22,7 @@
  bottomLeftTile.color = .red
  ```
 
- Use the `neighboringTiles` property to get a `Tile`s neighboring tiles.
+ Use the `neighboringTiles` property to get a `Tile`'s neighboring tiles.
 
  You can create new `TileLocation` objects either by using the `init(row: Int, column: Int)` initializer or by using the `advanced(by: Int, inDirection: Direction)` function.
 
