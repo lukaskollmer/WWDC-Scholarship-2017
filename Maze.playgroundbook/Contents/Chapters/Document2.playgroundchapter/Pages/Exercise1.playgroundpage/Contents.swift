@@ -35,19 +35,17 @@ func solveMaze(_ algorithm: GameLogic.Algorithm) {
 
 //#-editable-code
 
-func findPath(startTile: Tile, endTile: Tile) -> [TileLocation] {
-    guard let maze = startTile.mazeScene else { return [] }
+func findPath(from: Tile, to: Tile) -> [TileLocation] {
+    guard let maze = from.mazeScene else { return [] }
 
-    var queue = Array<PathStep>()
-    queue.append(PathStep(location: startTile.location))
-
+    var queue = [PathStep(location: from.location)]
     var exploredSteps = Set<PathStep>()
 
     while !queue.isEmpty {
         let currentStep = queue.removeFirst()
         exploredSteps.insert(currentStep)
 
-        if currentStep.location == endTile.location {
+        if currentStep.location == to.location {
             return currentStep.path
         }
 
