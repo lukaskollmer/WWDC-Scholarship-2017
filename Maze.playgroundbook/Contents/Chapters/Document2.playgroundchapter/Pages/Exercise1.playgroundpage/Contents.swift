@@ -12,7 +12,7 @@
 
  This is an example-implementation of the [Breadth-first](glossary://Breadth-first%20search) pathfinding algorithm. It works by starting on the root level and then looking at each subsequent level of children nodes, until it finds the destination node.
 
- Unlike the A*-Algorithm, this does not use heuristics, since it doesn't assign weight to individual nodes.
+ Unlike the A*-Algorithm, this does not use heuristics since it doesn't assign weight to individual nodes.
 
 
  */

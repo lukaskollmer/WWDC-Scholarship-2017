@@ -10,11 +10,7 @@
 /*:
  **Solution:** A*-Algorithm
 
- This is an example implementation of the A* pathfinding algorithm. It works by assigning a weight to each tile. This weight is equal to the distance between that tile and the initial tile, plus the distance between that tile and the destination tile. This weight represents a possible minimum distance between the initial tile and the destination tile. As a consequence of this, all paths with a greater weight can be discarded.
-
-
-
- This is an example implementation of the A* algorithm. It assigns a weight to each open tile location equal to the distance from the initial tile to that tile plus the distance from that tile to the destination tile. This approximate weight represents a minimum possible distance between that node and the destination. As a consequence of this, any path longer than that shortest weight can be discarded.
+ This is an example implementation of the A* pathfinding algorithm. It works by assigning a weight to each tile. This weight is equal to the distance between that tile and the start tile, plus the distance between that tile and the destination tile. The shortest path can be found by comparing the weights of different tiles, since shorter paths have a smaller weight.
 
  Tap the _Run 100x_ button to record a larger sample size. You can see that this algorithm - whilst not matching the performance of the GameplayKit implementation - does indeed solve the maze pretty fast.
 
