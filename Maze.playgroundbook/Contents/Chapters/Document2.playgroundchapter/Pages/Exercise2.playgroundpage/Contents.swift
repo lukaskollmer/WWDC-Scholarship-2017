@@ -54,7 +54,6 @@
                  var step = openSteps[existingIndex]
                  if currentStep.score + 1 < step.score { // 1 is the move cost to the next tile
                      step.set(parent: currentStep, moveCost: 1)
-
                      openSteps.remove(at: existingIndex)
                      openSteps.append(step)
                      openSteps.sort { $0.score <= $1.score }
@@ -69,7 +68,6 @@
      }
      return []
  }
-
 
  solveMaze(.custom(findPath))
  //#-end-editable-code

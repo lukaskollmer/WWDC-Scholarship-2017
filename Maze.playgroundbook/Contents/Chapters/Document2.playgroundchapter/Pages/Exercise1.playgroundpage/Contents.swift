@@ -58,7 +58,6 @@ func findPath(from: Tile, to: Tile) -> [TileLocation] {
             if let existingIndex = queue.index(of: step) {
                 var step = queue[existingIndex]
                 step.parent = currentStep
-
                 queue.remove(at: existingIndex)
                 queue.append(step)
             } else {
