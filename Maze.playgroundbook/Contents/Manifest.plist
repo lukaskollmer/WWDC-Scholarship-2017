@@ -17,7 +17,7 @@
 	<key>SwiftVersion</key>
 	<string>3.1</string>
 	<key>ImageReference</key>
-	<string>__dijkstra.png</string>
+	<string>cover.png</string>
 	<key>Chapters</key>
 	<array>
 		<string>Document1.playgroundchapter</string>
