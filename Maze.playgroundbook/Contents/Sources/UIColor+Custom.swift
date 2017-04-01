@@ -8,8 +8,6 @@
 
 import UIKit
 
-// TODO use these in the actual code
-
 public extension UIColor {
     public static let introductionMessage: UIColor = .darkGray
 

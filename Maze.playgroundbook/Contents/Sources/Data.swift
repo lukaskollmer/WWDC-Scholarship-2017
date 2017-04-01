@@ -13,10 +13,10 @@ import GameplayKit
 public struct MazeData {
     /// Number of rows in the maze
     public let numberOfRows: Int
-    
+
     /// Number of columns in the maze
     public let numberOfColumns: Int
-    
+
     /// A nested array containing each tile's state (path or wall). If you want to get a specific tile's state, use it like this: `data[row][column]`
     public let data: [[TileState]]
 
