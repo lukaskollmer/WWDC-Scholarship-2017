@@ -48,9 +48,7 @@
              guard location.state(inMaze: maze) == .path else { continue }
 
              var step = PathStep(location: location)
-             if closedSteps.contains(step) {
-                 continue
-             }
+             guard !closedSteps.contains(step) else { continue }
 
              if let existingIndex = openSteps.index(of: step) {
                  var step = openSteps[existingIndex]

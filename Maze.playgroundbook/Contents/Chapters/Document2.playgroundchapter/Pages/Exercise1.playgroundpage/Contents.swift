@@ -55,10 +55,7 @@ func findPath(startTile: Tile, endTile: Tile) -> [TileLocation] {
             guard location.state(inMaze: maze) == .path else { continue }
 
             var step = PathStep(location: location)
-
-            if exploredSteps.contains(step) {
-                continue
-            }
+            guard !exploredSteps.contains(step) else { continue }
 
             if let existingIndex = queue.index(of: step) {
                 var step = queue[existingIndex]
