@@ -38,7 +38,6 @@ func solveMaze(_ algorithm: GameLogic.Algorithm) {
 func findPath(startTile: Tile, endTile: Tile) -> [TileLocation] {
     guard let maze = startTile.mazeScene else { return [] }
 
-    // All TileLocations that still need to be explored
     var queue = Array<PathStep>()
     queue.append(PathStep(location: startTile.location))
 
@@ -49,14 +48,11 @@ func findPath(startTile: Tile, endTile: Tile) -> [TileLocation] {
         exploredSteps.insert(currentStep)
 
         if currentStep.location == endTile.location {
-            //maze.clearAllExploredTiles()
             return currentStep.path
         }
 
         for location in maze.tile(atLocation: currentStep.location).neighboringTiles {
             guard location.state(inMaze: maze) == .path else { continue }
-
-            //maze.tile(atLocation: location).markExplored()
 
             var step = PathStep(location: location)
 
@@ -74,10 +70,8 @@ func findPath(startTile: Tile, endTile: Tile) -> [TileLocation] {
                 step.parent = currentStep
                 queue.append(step)
             }
-
         }
     }
-
     return []
 }
 
