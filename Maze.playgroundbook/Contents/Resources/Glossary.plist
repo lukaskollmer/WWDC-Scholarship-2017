@@ -4,18 +4,6 @@
 <dict>
 	<key>Terms</key>
 	<dict>
-		<key>A*</key>
-		<dict>
-			<key>Definition</key>
-			<string>The practivce of encrypting and decrypting messages written in secret code.</string>
-			<key>FirstUse</key>
-			<dict>
-				<key>PageReference</key>
-				<string>Overview</string>
-				<key>Title</key>
-				<string>Overview</string>
-			</dict>
-		</dict>
 
 		<key>Dijkstra's algorithm</key>
 		<dict>
@@ -42,7 +30,6 @@
 				<string>Overview</string>
 			</dict>
 		</dict>
-
 
 	</dict>
 </dict>
